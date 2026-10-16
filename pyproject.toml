@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fitsense-ai"
+version = "0.1.0"
+description = "FitSense AI: On-device push-up counting, form assessment, and personalized baseline feedback."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "FitSense AI Team"}
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+indent-width = 4
+
+# Directories to exclude from linting and formatting
+exclude = [
+    ".git",
+    "reference",
+    "app",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "__pycache__"
+]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "SIM",  # flake8-simplify
+]
+ignore = [
+    "E501", # line too long (handled by formatter)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["prototype", "backend", "ml"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = [
+    "prototype/tests",
+    "backend/tests"
+]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | reference
+  | app
+  | \.venv
+  | build
+  | dist
+)/
+'''
